@@ -8,7 +8,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import tkinter as tk
 
-TIME = 5
+TIME = 15
 
 def get_now():
     now = datetime.now().strftime("%H:%M:%S.%f")
@@ -40,13 +40,13 @@ def get_cursor_loop(loop_second):
         # sleep
         time.sleep(0.1)
 
-    print(times)
-    print(positions)
+    # print(times)
+    # print(positions)
     return times, positions
 
 def get_window_size():
     window_size = pyautogui.size()
-    print(window_size)
+    # print(window_size)
     return window_size
 
 if __name__ == '__main__':

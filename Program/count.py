@@ -1,8 +1,10 @@
 import tkinter as tk
 import time 
 from datetime import datetime
+import sys
 
 times = []
+count = 0
 
 def get_now():
     now = datetime.now().strftime("%H:%M:%S.%f")
@@ -17,10 +19,13 @@ class Counter():
         print(now)
         # print(self.num)
         if data[self.num] == '\n':
+            # print(self.num)          
             self.num += 1
-        if self.num > (50-1):
-            button["text"] = "終了"
+        if self.num == 50:
+            sys.exit()
         else:
+            # print("number")
+            # print(self.num)
             button["text"] = data[self.num]
             self.num += 1
     
