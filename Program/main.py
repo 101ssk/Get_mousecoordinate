@@ -8,7 +8,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import tkinter as tk
 
-TIME = 15
+TIME = 10
 
 def get_now():
     now = datetime.now().strftime("%H:%M:%S.%f")
@@ -25,6 +25,8 @@ def get_cursor_loop(loop_second):
     """
     times = []
     positions = []
+    p_x = []
+    p_y = []
     count = 0
 
     for _ in range(0, loop_second*10):
@@ -32,6 +34,8 @@ def get_cursor_loop(loop_second):
         now = get_now()
         x, y = pyautogui.position()
 
+        p_x.append(x)
+        p_y.append(y)
         # リストに情報を追加
         times.append(now)
         positions.append([x, y])
@@ -42,7 +46,7 @@ def get_cursor_loop(loop_second):
 
     # print(times)
     # print(positions)
-    return times, positions
+    return times, positions,p_x,p_y
 
 def get_window_size():
     window_size = pyautogui.size()
@@ -50,7 +54,7 @@ def get_window_size():
     return window_size
 
 if __name__ == '__main__':
-    times, positions = get_cursor_loop(TIME)
+    times, positions, p_x, p_y = get_cursor_loop(TIME)
     window_size = get_window_size()
 
     with open('position.txt','wt') as f:
@@ -60,6 +64,14 @@ if __name__ == '__main__':
     with open('time.txt','wt') as f:
         for y in times:
             f.write(str(y)+'\n')
+
+    with open('p_x.txt','wt') as f:
+        for i in p_x:
+            f.write(str(i)+'\n')
+    
+    with open('p_y.txt','wt') as f:
+        for j in p_y:
+            f.write(str(j)+'\n')
 
     data = np.array(positions)
     df = pd.DataFrame(data, columns=['x', 'y'])
